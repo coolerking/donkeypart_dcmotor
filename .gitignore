@@ -1,0 +1,4 @@
+__pycache__
+.git
+donkeypart_dcmotor.egg-info
+.pytest_cache
