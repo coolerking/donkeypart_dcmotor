@@ -9,11 +9,25 @@
 
 本リポジトリでは、DCモータドライバ [TA7291P](http://akizukidenshi.com/catalog/g/gI-02001/) を使用した以下のような回路を組んだ状態とする。
 
-![TA7291P回路図](./assets/ta7291p_two_pwms.png)
+![TA7291Pを2つのPWMで操作](./assets/ta7291p_two_pwms.png)
+
+単一のDCモータとRaspberry Piとの結線例は以下の通りである。
+
+![TA7291P回路図　単一モータ](./assets/single_motor.png)
+
+|GPIO番号|接続先|備考|
+|:-|:-|:-|
+|5V|TA7291P 7pin(Vcc), 10kΩ経由でTA7291P 4pin(Vref)|-|
+|GND|TA7291P 1pin(GND), DCモータGND|-|
+|GPIO19|TA7291P 5pin(IN1)|PWM OUTPUT|
+|GPIO26|TA7291P 6pin(IN2)|PWM OUTPUT|
+
+モータ1基の場合は、Raspberry Pi側のVccをDCモータ電源としても利用可能だが、ノイズ対策の麺からも別のバッテリを用意することを推奨する。
 
 > TA7291P は、IN1/IN2 をデジタルOUTPUTピンとして扱い、VrefをPWMピンとして操作する方法が [データシート](http://akizukidenshi.com/download/ta7291p.pdf) 上では記述されているが、上記のようにIN1/IN2をPWMピンとして操作することも可能である。
+> しかし本リポジトリでは、この方法による説明は省略する。
 
-複数のモータを操作する場合は、以下のような回路を組むことで対応可能である。３個以上の場合も同様だが、モータ側電源を適正に選択する必要がある。TA7291PのVrefは0Vから20Vまでである。
+複数のDCモータを操作する場合は、以下のような回路を組むことで対応可能である。３個以上の場合も同様だが、モータ側電源を適正に選択する必要がある。TA7291PのVrefは0Vから20Vまでである。
 
 ![TA7291P回路図　複数モータ](./assets/two_motors.png)
 
